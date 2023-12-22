@@ -14,6 +14,27 @@ language switching capabilities.
 
 ## Usage
 
+### Load Language File
+Create a CSV Language file and import it in Godot (Project Settings/Localizations/Add):
+	
+```csv
+keys,de,en,fr,zh,it,ja,es,pt
+menu_start,Start,Start,Début,开始,Iniziare,スタート,Inicie,Início
+menu_scores,Erfolge,Scores,Succès,效益,Successi,成功事例,Éxitos,Sucessos
+menu_version,Version:,Version:,Version :,版本,Versione:,バージョン,Versión:,Versão:
+menu_id,ID:,ID:,ID :,身分证,ID:,IDです。,ID:,IDENTIFICAÇÃO:
+scores_achievement,Bestenliste,Leaderboard,Palmarès,最佳名单,Ranking list,ランキング一覧,Listado de la clasificación,Lista de classificação
+scores_name,Name,Name,Nom,命名,Nome,名称,Nombre,Nome
+de,Deutsch,German,Allemand,德国,Tedesco,ジャーマン,Alemán,Alemão
+en,Englisch,English,Anglais,英语,Inglese,イングリッシュ,Inglés,Inglês
+fr,Französisch,French,Français,法国,Francese,フレンチ,Francés,Francês
+zh,Chinesisch,Chinese,Chinois,中国,Chino,唐,Chino,Chinês
+it,Italienisch,Italian,Italien,意大利语,Italiano,イタリアン,Italiano,Italiano
+ja,Japanisch,Japanese,Japonais,日本人,Giapponese,やまと,Japonés,Japonês
+es,Spanisch,Spanish,Espagnol,西班牙,Spagnolo,スパニッシュ,Español,Espanhol
+pt,Portugiesisch,Portuguese,Portugais,葡萄牙语,Portoghese,ポルトガル語,Portugués,Português
+```
+
 ### Initialization
 ```gdscript
 var language_processor = GLanguage.LanguageProcessor.new("en") # Set language from save file or own detection
