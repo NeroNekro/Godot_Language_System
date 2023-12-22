@@ -1,57 +1,87 @@
-# 2090s Storage System
+# 2090s Language System
 
 ## Overview
-The File class is a storage utility for handling file operations with optional encryption in Godot Engine. It allows for the creation, reading, writing, updating, and deletion of file contents, with an emphasis on handling JSON-formatted data.
+The LanguageProcessor class is a comprehensive solution for handling language-specific settings in the Godot Engine. 
+It manages language selection and font variations for UI elements based on the current language setting. 
+This class is especially useful for multilingual applications and games, providing easy integration and dynamic 
+language switching capabilities.
 
 ## Features
-- **Data Storage**: Stores data in a dictionary format.
-- **Encryption**: Optional encryption for file contents using a secret key.
-- **Flexible File Handling**: Handles file creation, reading, and writing operations.
-- **JSON Format**: Parses and stores data in JSON format.
+- **Language Support**: Supports a variety of languages, including those with Latin, Greek, Cyrillic, East Asian (Chinese, Korean, Japanese), and other.
+- **Font Management**: Handles different font styles (regular, bold, italic/light) for each supported language.
+- **Automatic Language Detection**: Defaults to the system language or falls back to English if the system language is not supported.
+
 
 ## Usage
 
 ### Initialization
 ```gdscript
-var file = GStorage.File.new(file_path, open_file, secretkey="")
+var language_processor = GLanguage.LanguageProcessor.new("en") # Set language from save file or own detection
+var language_processor = GLanguage.LanguageProcessor.new() # Auto-detect language with the OS.get_locale_language() function
 ```
 
-- **file_path**: The path where the file is located or will be created.
-- **open_file**: The name of the file to open or create.
-- **secretkey**: The encryption key for securing the file. If empty, no encryption will be set.
+- **language**: The path where the file is located or will be created.
 
 
 ### Methods
-Sets the data in the file dictionary and writes it to the file. Didnt overwrite the whole dictionary. Existing values are overwritten and new values are added
+
+#### Set Language
+If you want to change the language on runtime, maybe the user want to change the language
 
 ```gdscript
-var file = GStorage.File.set_data(dict)
+language_processor.set_lang(lang)
 ```
 
-- **dict**: i.e. {"device_id": 1, ...}
+- **lang**:  Language code to set as the current language. ("de" or something else)
+- **return**: null
+
+#### Get Language
+If you want to get the current language:
+```gdscript
+var current_language = language_processor.get_lang()
+```
+
+- **return**: Returns the currently set language. (i.e. "en")
+
+#### Get Font
+
+If you want the current fonts:
+```gdscript
+var fonts = language_processor.get_font()
+```
+
+- **return**: Returns an array containing the current fonts (regular, bold, italic/light).
+
+#### Translate String
+
+If you want to translate a string:
+```gdscript
+var translated_text = language_processor.translate_string(str_lang)
+```
+
+- **str_lang**: The string identifier to be translated.
+- **return**: The string identifier to be translated.
+
+
+#### Translate UI Tree
+
+If you want to translate the whole scene. Best place is to add this line to the _ready function:
+```gdscript
+func _ready():
+	language_processor.translate_tree(root_node)
+```
+
+- **root_node**: The root node of the UI tree to be translated and themed. (i.e. get_tree().get_root() )
 - **return**: null
 
 
-If you want to change a single value without passing a dictionary:
+#### Add Fonts and Translate a Node
+
+If you create a node on gdscript (Richtext or Label) you can add the translated text and the right fonts:
 ```gdscript
-var file = GStorage.File.set_key(key, value)
+language_processor.translate(node, str_lang)
 ```
 
-- **key**: i.e. "device_id"
-- **value**: i.e. 1
-- **return**: value
-
-If you want to have all data as a dictionary:
-```gdscript
-var file = GStorage.File.get_all_data()
-```
-
-- **return**: dictionary
-
-
-If you want to delete a key:
-```gdscript
-var file = GStorage.File.delete_data()
-```
-
+- **node**: The node to be updated with fonts and translation.
+- **str_lang**: The string identifier for translation.
 - **return**: null
