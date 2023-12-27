@@ -6,6 +6,12 @@ It manages language selection and font variations for UI elements based on the c
 This class is especially useful for multilingual applications and games, providing easy integration and dynamic 
 language switching capabilities.
 
+If you want to translate the whole Scene. Your nodes have to get the name like the key in the csv file.
+Label or Richtext Node:
+menu_start
+
+The script search for a key like the node name and translate it.
+
 ## Features
 - **Language Support**: Supports a variety of languages, including those with Latin, Greek, Cyrillic, East Asian (Chinese, Korean, Japanese), and other.
 - **Font Management**: Handles different font styles (regular, bold, italic/light) for each supported language.

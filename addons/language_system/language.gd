@@ -68,14 +68,8 @@ class LanguageProcessor:
 		if language == "":
 			var system_language : String = OS.get_locale_language()
 			# Check if system language is supported, otherwise default to English
-			print(system_language)
-			if (system_language not in latin_greek_cyrillic or 
-				system_language not in ko_zh_ja or 
-				system_language not in myanmar or
-				system_language not in ar_he or
-				system_language not in tibetan or
-				system_language not in thai or
-				system_language not in hindi):
+			var lang_list = latin_greek_cyrillic + ko_zh_ja + myanmar + ar_he + tibetan + thai + hindi
+			if !lang_list.has(system_language):
 				system_language = "en"
 			self.set_lang(system_language)
 		else:
@@ -98,16 +92,17 @@ class LanguageProcessor:
 			self._region = "thai"
 		elif self._cur_language in hindi:
 			self._region = "hindi"
+		return
 	
 	# Sets the font based on the current region
 	func set_font():
 		# Load and set fonts for regular, bold, and italic/light based on the current region
 		self.cur_font_regular = FontVariation.new()
 		self.cur_font_bold = FontVariation.new()
-		self.cur_font_italic_light = FontVariation.new()		
-		self.cur_font_regular.set_base_font = load(self.list_font[self._region]["regular"])
-		self.cur_font_bold.set_base_font = load(self.list_font[self._region]["bold"])
-		self.cur_font_italic_light.set_base_font = load(self.list_font[self._region]["italic_light"])
+		self.cur_font_italic_light = FontVariation.new()
+		self.cur_font_regular.set_base_font(load(self.list_font[self._region]["regular"]))
+		self.cur_font_bold.set_base_font(load(self.list_font[self._region]["bold"]))
+		self.cur_font_italic_light.set_base_font(load(self.list_font[self._region]["italic_or_light"]))
 		
 	# Returns the currently set fonts
 	func get_font():
