@@ -43,8 +43,8 @@ pt,Portugiesisch,Portuguese,Portugais,葡萄牙语,Portoghese,ポルトガル語
 
 ### Initialization
 ```gdscript
-var language_processor = GLanguage.LanguageProcessor.new("en") # Set language from save file or own detection
-var language_processor = GLanguage.LanguageProcessor.new() # Auto-detect language with the OS.get_locale_language() function
+var language_processor = Godot_Language_System.LanguageProcessor.new("en") # Set language from save file or own detection
+var language_processor = Godot_Language_System.LanguageProcessor.new() # Auto-detect language with the OS.get_locale_language() function
 ```
 
 - **language**: The path where the file is located or will be created.
@@ -99,7 +99,7 @@ func _ready():
 ```
 
 - **root_node**: The root node of the UI tree to be translated and themed. (i.e. get_tree().get_root() )
-- **return**: null
+- **return**: void
 
 
 #### Add Fonts and Translate a Node
@@ -111,4 +111,4 @@ language_processor.translate(node, str_lang)
 
 - **node**: The node to be updated with fonts and translation.
 - **str_lang**: The string identifier for translation.
-- **return**: null
+- **return**: void
